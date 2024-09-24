@@ -41,13 +41,14 @@ res.status(200).json({
 
    }catch(error){
     console.log("Error in signup",error.message)
-    res.status(500).json({error:"iinternal server error"})
+    res.status(500).json({error:"internal server error"})
    }
 
 
 }
-export const login= async(req,res)=>{
-    try {
+
+export const login = async (req, res) => {
+	try {
 		const { username, password } = req.body;
 		const user = await User.findOne({ username });
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
@@ -68,7 +69,7 @@ export const login= async(req,res)=>{
 		console.log("Error in login controller", error.message);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
-}
+};
 export const logout=async(req,res)=>{
    try{
     res.cookie("jwt","",{maxAge:0});
